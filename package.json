@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "advlib-identifier": ">=0.1.0",
+    "mqtt": "^5.15.0",
     "protobufjs": "^8.0.0",
     "raddec": ">=0.6.2"
   },

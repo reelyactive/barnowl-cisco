@@ -3,11 +3,15 @@
 const BarnowlCisco = require('../lib/barnowlcisco.js');
 
 const DECODING_OPTIONS = {};
-const LISTENER_OPTIONS = {};
+const LISTENER_OPTIONS = { url: "mqtt://localhost",
+                           topic: "cisco/iotorchestrator/v1/#" };
 
 let barnowl = new BarnowlCisco();
 
-barnowl.addListener(BarnowlCisco.TestListener, LISTENER_OPTIONS);
+console.log('Subscribing to topic', LISTENER_OPTIONS.topic, 'on',
+            LISTENER_OPTIONS.url);
+
+barnowl.addListener(BarnowlCisco.MqttListener, LISTENER_OPTIONS);
 
 barnowl.on('raddec', (raddec) => {
   console.log(raddec.toFlattened());
