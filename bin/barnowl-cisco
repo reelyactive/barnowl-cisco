@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+const BarnowlCisco = require('../lib/barnowlcisco.js');
+
+const DECODING_OPTIONS = {};
+const LISTENER_OPTIONS = {};
+
+let barnowl = new BarnowlCisco();
+
+barnowl.addListener(BarnowlCisco.TestListener, LISTENER_OPTIONS);
+
+barnowl.on('raddec', (raddec) => {
+  console.log(raddec.toFlattened());
+});
+
+barnowl.on('infrastructureMessage', (infrastructureMessage) => {
+  console.log(infrastructureMessage);
+});
