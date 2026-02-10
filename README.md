@@ -4,6 +4,78 @@ barnowl-cisco
 __barnowl-cisco__ converts the decodings of _any_ Bluetooth Low Energy devices by [Cisco](https://www.cisco.com/) access points into standard developer-friendly JSON that is vendor/technology/application-agnostic.
 
 
+Quick Start
+-----------
+
+Clone this repository, install package dependencies with `npm install`, and then from the root folder run at any time:
+
+    npm start
+
+__barnowl-cisco__ will attempt to connect to a MQTT broker on localhost and subscribe to the topic `cisco/iotorchestrator/v1/#`.  Any messages published by IoT Orchestrator will be processed and output as (flattened) __raddec__ JSON to the console.
+
+
+Hello barnowl-cisco!
+--------------------
+
+Developing an application directly from __barnowl-cisco__?  Start by pasting the code below into a file called server.js:
+
+```javascript
+const Barnowl = require('barnowl');
+const BarnowlCisco = require('barnowl-cisco');
+
+let barnowl = new Barnowl({ enableMixing: true });
+
+barnowl.addListener(BarnowlCisco, {}, BarnowlCisco.TestListener, {});
+
+barnowl.on('raddec', (raddec) => {
+  console.log(raddec);
+  // Trigger your application logic here
+});
+```
+
+From the same folder as the server.js file, install package dependencies with the commands `npm install barnowl-cisco` and `npm install barnowl`.  Then run the code with the command `node server.js` and observe the _simulated_ data stream of radio decodings (raddec objects) output to the console:
+
+```javascript
+{
+  transmitterId: "fee150bada55",
+  transmitterIdType: 2,
+  rssiSignature: [
+    {
+      receiverId: "ffff80ff0000",
+      receiverIdType: 2,
+      rssi: -77,
+      numberOfDecodings: 1
+    }
+  ],
+  packets: [ '...' ],
+  timestamp: 1645568542222
+}
+```
+
+See the [Supported Listener Interfaces](#supported-listener-interfaces) below to adapt the code to listen for your AP(s).
+
+
+Supported Listener Interfaces
+-----------------------------
+
+The following listener interfaces are supported.
+
+### MQTT
+
+```javascript
+barnowl.addListener(BarnowlCisco, {}, BarnowlCisco.MqttListener,
+                    { url: "mqtt://localhost", topic: "specify/topic/here" });
+```
+
+### Test
+
+Provides a steady stream of simulated messages for testing purposes.
+
+```javascript
+barnowl.addListener(BarnowlCisco, {}, BarnowlCisco.TestListener, {});
+```
+
+
 Compiling Protocol Buffer JavaScript bundles
 --------------------------------------------
 
