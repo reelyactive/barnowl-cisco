@@ -67,6 +67,12 @@ barnowl.addListener(BarnowlCisco, {}, BarnowlCisco.MqttListener,
                     { url: "mqtt://localhost", topic: "specify/topic/here" });
 ```
 
+### Serial
+```javascript
+barnowl.addListener(BarnowlCisco, {}, BarnowlCisco.SerialListener,
+                    { path: "/dev/ttyiot0" });
+```
+
 ### Test
 
 Provides a steady stream of simulated messages for testing purposes.
