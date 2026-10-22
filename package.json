@@ -20,6 +20,8 @@
   "main": "./lib/barnowlcisco.js",
   "scripts": {
     "start": "node bin/barnowl-cisco",
+    "serial": "node bin/barnowl-cisco-serial",
+    "serial-forwarder": "node bin/barnowl-cisco-serial-forwarder",
     "iotorchestratorproto": "pbjs -t static-module -w commonjs -o lib/iotorchestratorproto.js --path proto data_app.proto"
   },
   "repository": {
@@ -32,7 +34,6 @@
     "protobufjs": "^8.0.0",
     "raddec": ">=0.6.2"
   },
-  "devDependencies": {},
   "bugs": {
     "url": "https://github.com/reelyactive/barnowl-cisco/issues"
   },

@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+const BarnowlCisco = require('../lib/barnowlcisco.js');
+
+// ----- Exit gracefully if the optional dependency is not found -----
+try {
+  let serialport = require('serialport');
+}
+catch(err) {
+  console.log('This script requires the serialport package.  Try installing with:');
+  console.log('\r\n    "npm install serialport"\r\n');
+  return console.log('and then run this script again.');
+}
+// -------------------------------------------------------------------
+
+let barnowl = new BarnowlCisco();
+barnowl.addListener(BarnowlCisco.SerialListener, { path: "/dev/ttyiot0" });
+
+barnowl.on('raddec', (raddec) => {
+  console.log(raddec.toFlattened());
+});

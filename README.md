@@ -13,6 +13,12 @@ Clone this repository, install package dependencies with `npm install`, and then
 
 __barnowl-cisco__ will attempt to connect to a MQTT broker on localhost and subscribe to the topic `cisco/iotorchestrator/v1/#`.  Any messages published by IoT Orchestrator will be processed and output as (flattened) __raddec__ JSON to the console.
 
+To instead listen on the serial interface of an AP, install the optional serialport dependency with `npm install serialport`, and then from the root folder run at any time:
+
+    npm run serial
+
+__barnowl-cisco__ will attempt to listen for serial data on /dev/ttyiot0, and output (flattened) __raddec__ JSON to the console.
+
 
 Hello barnowl-cisco!
 --------------------
@@ -80,6 +86,16 @@ Provides a steady stream of simulated messages for testing purposes.
 ```javascript
 barnowl.addListener(BarnowlCisco, {}, BarnowlCisco.TestListener, {});
 ```
+
+
+Pareto Anywhere Integration
+---------------------------
+
+__barnowl-cisco__ includes a script to forward serial data to a remote Pareto Anywhere instance as UDP raddecs on port 50001. Manually install the serialport dependency with `npm install serialport` and then start this script with the command:
+
+    npm run serial-forwarder xxx.xxx.xxx.xxx
+
+where xxx.xxx.xxx.xxx is the IP address of the remote instance.
 
 
 Compiling Protocol Buffer JavaScript bundles
