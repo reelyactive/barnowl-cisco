@@ -26,7 +26,7 @@ let barnowl = new BarnowlCisco();
 barnowl.addListener(BarnowlCisco.SerialListener, { path: "/dev/ttyiot0" });
 
 barnowl.on('raddec', (raddec) => {
-  let raddecHex = raddec.encodeAsHexString({ includeTimestamp: true,
+  let raddecHex = raddec.encodeAsHexString({ includeTimestamp: false,
                                              includePackets: true });
   client.send(Buffer.from(raddecHex, 'hex'), port, address, (err) => {
     if(err) {
