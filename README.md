@@ -79,6 +79,8 @@ barnowl.addListener(BarnowlCisco, {}, BarnowlCisco.SerialListener,
                     { path: "/dev/ttyiot0" });
 ```
 
+Note that the default baud rate is 115200 and flow control (RTS/CTS) is enabled.
+
 ### Test
 
 Provides a steady stream of simulated messages for testing purposes.
